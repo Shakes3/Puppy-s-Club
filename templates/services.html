@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Our Services — PawsInn{% endblock %}
+{% block meta_desc %}Explore premium dog boarding, grooming, daycare and training services at PawsInn.{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="{% url 'core:home' %}">Home</a> / Services</nav>
+    <h1>Our Services 🐾</h1>
+    <p style="color:var(--text-muted);margin-top:0.75rem;max-width:540px;">Everything your dog needs — from cozy overnight stays to full spa treatments.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    {% if services %}
+    <div class="services-grid">
+      {% for svc in services %}
+      <div class="service-card fade-up">
+        <div class="service-icon">{{ svc.icon }}</div>
+        <h3>{{ svc.name }}</h3>
+        <p>{{ svc.short_description }}</p>
+        {% if svc.description %}<p style="margin-top:0.75rem;font-size:0.88rem;color:var(--text-muted);">{{ svc.description }}</p>{% endif %}
+        {% if svc.price_from %}
+        <div class="service-price">From ${{ svc.price_from }} <span>{{ svc.price_label }}</span></div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center;padding:4rem;color:var(--text-muted);">
+      <div style="font-size:4rem;margin-bottom:1rem;">🐾</div>
+      <p>Services are being updated. Check back soon!</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Questions About Our Services?</h2>
+    <p>Our team is happy to help you find the perfect plan for your dog.</p>
+    <a href="{% url 'core:contact' %}" class="btn btn-white">Contact Us →</a>
+  </div>
+</section>
+{% endblock %}

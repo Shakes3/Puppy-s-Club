@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Gallery — PawsInn{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="{% url 'core:home' %}">Home</a> / Gallery</nav>
+    <h1>Gallery 📸</h1>
+    <p style="color:var(--text-muted);margin-top:0.75rem;">A peek into the daily life of our happy guests.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    {% if tags %}
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-tag="" onclick="filterTag(this,'')">All</button>
+      {% for tag in tags %}
+      <button class="filter-btn" data-tag="{{ tag }}" onclick="filterTag(this,'{{ tag }}')">{{ tag|title }}</button>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if images %}
+    <div class="gallery-grid" id="gallery-grid">
+      {% for img in images %}
+      <div class="gallery-item fade-up" data-tag="{{ img.tag }}">
+        <img src="{{ img.image.url }}" alt="{{ img.caption|default:'PawsInn gallery' }}" loading="lazy">
+        <div class="gallery-overlay">🔍</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center;padding:4rem;color:var(--text-muted);">
+      <div style="font-size:4rem;margin-bottom:1rem;">📷</div>
+      <p>Photos coming soon! Check back for adorable content.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function filterTag(btn, tag) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.display = (!tag || item.dataset.tag === tag) ? '' : 'none';
+  });
+}
+</script>
+{% endblock %}

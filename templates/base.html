@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}PawsInn — Premium Dog Hostel{% endblock %}</title>
+  <meta name="description" content="{% block meta_desc %}PawsInn is a premium dog hostel offering boarding, grooming, daycare and more for your beloved furry friends.{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="{% url 'core:home' %}" class="navbar-brand">🐾 Paws<span>Inn</span></a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="{% url 'core:home' %}" {% if page == 'home' %}class="active"{% endif %}>Home</a></li>
+    <li><a href="{% url 'core:services' %}" {% if page == 'services' %}class="active"{% endif %}>Services</a></li>
+    <li><a href="{% url 'core:gallery' %}" {% if page == 'gallery' %}class="active"{% endif %}>Gallery</a></li>
+    <li><a href="{% url 'core:blog_list' %}" {% if page == 'blog' %}class="active"{% endif %}>Blog</a></li>
+    <li><a href="{% url 'core:about' %}" {% if page == 'about' %}class="active"{% endif %}>About</a></li>
+    <li><a href="{% url 'core:contact' %}" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- MESSAGES -->
+{% if messages %}
+<div class="messages-wrap" style="margin-top:80px;">
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">
+    <span>{% if message.tags == 'success' %}✅{% else %}⚠️{% endif %}</span>
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- MAIN CONTENT -->
+<main>{% block content %}{% endblock %}</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">🐾 Paws<span>Inn</span></div>
+      <p class="footer-desc">A luxury home away from home for your furry family members. Professional care, endless love.</p>
+      <div class="footer-social">
+        {% if site.facebook_url %}<a href="{{ site.facebook_url }}" class="social-link" aria-label="Facebook">📘</a>{% endif %}
+        {% if site.instagram_url %}<a href="{{ site.instagram_url }}" class="social-link" aria-label="Instagram">📸</a>{% endif %}
+        {% if site.twitter_url %}<a href="{{ site.twitter_url }}" class="social-link" aria-label="Twitter">🐦</a>{% endif %}
+        <a href="{% url 'core:contact' %}" class="social-link" aria-label="Contact">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="{% url 'core:home' %}">Home</a></li>
+        <li><a href="{% url 'core:services' %}">Services</a></li>
+        <li><a href="{% url 'core:gallery' %}">Gallery</a></li>
+        <li><a href="{% url 'core:about' %}">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul class="footer-links">
+        <li><a href="{% url 'core:services' %}">Dog Boarding</a></li>
+        <li><a href="{% url 'core:services' %}">Grooming</a></li>
+        <li><a href="{% url 'core:services' %}">Daycare</a></li>
+        <li><a href="{% url 'core:services' %}">Training</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul class="footer-links">
+        <li>📞 {{ site.phone }}</li>
+        <li>✉️ {{ site.email }}</li>
+        <li>📍 {{ site.address }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {% now "Y" %} PawsInn Dog Hostel. Made with ❤️ for dogs everywhere. &nbsp;|&nbsp; <a href="/admin/">Admin</a></p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <img src="" alt="Gallery" class="lightbox-img" id="lightbox-img">
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us — PawsInn{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="{% url 'core:home' %}">Home</a> / Contact</nav>
+    <h1>Get in Touch 🐾</h1>
+    <p style="color:var(--text-muted);margin-top:0.75rem;">We'd love to hear from you. Reach out and we'll respond within 24 hours.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h2 class="section-title" style="font-size:1.8rem;">Let's Talk About<br>Your Dog</h2>
+        <p style="color:var(--text-muted);margin-bottom:2rem;">Whether you have a question about our services, want to book a stay, or just want to say hello — we're here for you.</p>
+
+        <div class="contact-card fade-up">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Phone</h4>
+            <p>{{ site.phone }}</p>
+          </div>
+        </div>
+        <div class="contact-card fade-up stagger-1">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p>{{ site.email }}</p>
+          </div>
+        </div>
+        <div class="contact-card fade-up stagger-2">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Address</h4>
+            <p>{{ site.address }}</p>
+          </div>
+        </div>
+        <div class="contact-card fade-up stagger-3">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Opening Hours</h4>
+            <p>Mon–Sat: 7am – 7pm<br>Sunday: 8am – 5pm</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card fade-up">
+        <h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1.5rem;">Send Us a Message</h3>
+        <form method="post" action="{% url 'core:contact' %}" id="contact-form">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name">Full Name *</label>
+              {{ form.name }}
+              {% if form.name.errors %}<small style="color:#f07782;">{{ form.name.errors.0 }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email Address *</label>
+              {{ form.email }}
+              {% if form.email.errors %}<small style="color:#f07782;">{{ form.email.errors.0 }}</small>{% endif %}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-phone">Phone Number</label>
+              {{ form.phone }}
+            </div>
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              {{ form.subject }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message *</label>
+            {{ form.message }}
+            {% if form.message.errors %}<small style="color:#f07782;">{{ form.message.errors.0 }}</small>{% endif %}
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="contact-submit">
+            Send Message 🐾
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

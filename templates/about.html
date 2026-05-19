@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}About Us — PawsInn{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb"><a href="{% url 'core:home' %}">Home</a> / About</nav>
+    <h1>About PawsInn 🐾</h1>
+    <p style="color:var(--text-muted);margin-top:0.75rem;">Our story, our passion, and our promise to you and your dog.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-img fade-up">
+        {% if settings.about_image %}
+          <img src="{{ settings.about_image.url }}" alt="About PawsInn">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1534361960057-19f4434a92d5?w=600&q=80" alt="About PawsInn">
+        {% endif %}
+        <div class="about-badge-overlay">
+          <div class="big-num">{{ settings.years_experience }}+</div>
+          <div>Years of<br>Excellence</div>
+        </div>
+      </div>
+      <div class="fade-up stagger-1">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">{{ settings.about_title }}</h2>
+        <p style="color:var(--text-muted);margin-bottom:1.5rem;">{{ settings.about_text }}</p>
+        <ul class="feature-list">
+          <li>Certified and trained dog care professionals</li>
+          <li>24/7 supervision and safety monitoring</li>
+          <li>Veterinary partnerships for emergencies</li>
+          <li>Climate-controlled, spacious suites</li>
+          <li>Daily photo and video updates to owners</li>
+          <li>Personalised feeding and medication schedules</li>
+        </ul>
+        <a href="{% url 'core:contact' %}" class="btn btn-primary">Get in Touch 🐾</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-grid container">
+    <div class="fade-up">
+      <div class="stat-num" data-target="{{ settings.years_experience }}" data-suffix="+">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="fade-up stagger-1">
+      <div class="stat-num" data-target="{{ settings.dogs_hosted }}" data-suffix="+">0</div>
+      <div class="stat-label">Dogs Hosted</div>
+    </div>
+    <div class="fade-up stagger-2">
+      <div class="stat-num" data-target="{{ settings.happy_families }}" data-suffix="+">0</div>
+      <div class="stat-label">Happy Families</div>
+    </div>
+    <div class="fade-up stagger-3">
+      <div class="stat-num" data-target="{{ settings.staff_count }}" data-suffix="">0</div>
+      <div class="stat-label">Expert Staff</div>
+    </div>
+  </div>
+</div>
+
+{% if testimonials %}
+<section>
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">Happy Tails</span>
+      <h2 class="section-title fade-up">What Pet Parents Say</h2>
+    </div>
+    <div class="testimonials-track">
+      {% for t in testimonials %}
+      <div class="testimonial-card fade-up">
+        <div class="stars">{% for s in t.stars %}⭐{% endfor %}</div>
+        <p class="testimonial-body">"{{ t.body }}"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            {% if t.author_photo %}<img src="{{ t.author_photo.url }}" alt="{{ t.author_name }}">
+            {% else %}{{ t.author_name|first }}{% endif %}
+          </div>
+          <div>
+            <div class="testimonial-name">{{ t.author_name }}</div>
+            {% if t.dog_name %}<div class="testimonial-dog">🐾 {{ t.dog_name }}</div>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

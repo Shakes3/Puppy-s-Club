@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PawsInn — Premium Dog Hostel & Boarding{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge fade-up">🐾 Premium Dog Hostel</div>
+      <h1 class="hero-title fade-up stagger-1">
+        {{ settings.hero_title|default:"A Home Away<br>From <span class='highlight'>Home</span> For Your Dog" }}
+      </h1>
+      <p class="hero-subtitle fade-up stagger-2">{{ settings.hero_subtitle|default:"Premium boarding, grooming, and daycare for your beloved furry family member." }}</p>
+      <div class="hero-actions fade-up stagger-3">
+        <a href="{% url 'core:contact' %}" class="btn btn-primary">📅 Book a Stay</a>
+        <a href="{% url 'core:services' %}" class="btn btn-outline">Our Services →</a>
+      </div>
+    </div>
+    <div class="hero-img-wrap fade-up">
+      {% if settings.hero_image %}
+        <img src="{{ settings.hero_image.url }}" alt="Happy dogs at PawsInn">
+      {% else %}
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Happy dog at PawsInn">
+      {% endif %}
+      <div class="hero-img-badge">
+        <div class="badge-num">5K+</div>
+        <div class="badge-label">Happy Dogs<br>Hosted</div>
+      </div>
+      <div class="hero-float-card">⭐ 4.9 / 5 Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-grid container">
+    <div class="fade-up">
+      <div class="stat-num" data-target="{{ settings.years_experience }}" data-suffix="+">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="fade-up stagger-1">
+      <div class="stat-num" data-target="{{ settings.dogs_hosted }}" data-suffix="+">0</div>
+      <div class="stat-label">Dogs Hosted</div>
+    </div>
+    <div class="fade-up stagger-2">
+      <div class="stat-num" data-target="{{ settings.happy_families }}" data-suffix="+">0</div>
+      <div class="stat-label">Happy Families</div>
+    </div>
+    <div class="fade-up stagger-3">
+      <div class="stat-num" data-target="{{ settings.staff_count }}" data-suffix="">0</div>
+      <div class="stat-label">Expert Staff</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+{% if featured_services %}
+<section id="services-preview">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title fade-up">Premium Services <br>For Your Best Friend</h2>
+      <p class="section-sub fade-up">Every dog deserves the best. Explore our curated range of professional services.</p>
+    </div>
+    <div class="services-grid">
+      {% for svc in featured_services %}
+      <div class="service-card fade-up">
+        <div class="service-icon">{{ svc.icon }}</div>
+        <h3>{{ svc.name }}</h3>
+        <p>{{ svc.short_description }}</p>
+        {% if svc.price_from %}
+        <div class="service-price">From ${{ svc.price_from }} <span>{{ svc.price_label }}</span></div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="{% url 'core:services' %}" class="btn btn-outline">View All Services →</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- GALLERY PREVIEW -->
+{% if gallery_preview %}
+<section style="background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">Our Happy Guests</span>
+      <h2 class="section-title fade-up">Life at PawsInn 🐶</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+      {% for img in gallery_preview %}
+      <div class="gallery-item fade-up" style="border-radius:12px;overflow:hidden;height:200px;">
+        <img src="{{ img.image.url }}" alt="{{ img.caption }}" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gallery-overlay">🔍</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="{% url 'core:gallery' %}" class="btn btn-outline">View Full Gallery →</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- TESTIMONIALS -->
+{% if testimonials %}
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">Happy Tails</span>
+      <h2 class="section-title fade-up">What Pet Parents Say</h2>
+    </div>
+    <div class="testimonials-track">
+      {% for t in testimonials %}
+      <div class="testimonial-card fade-up">
+        <div class="stars">{% for s in t.stars %}⭐{% endfor %}</div>
+        <p class="testimonial-body">"{{ t.body }}"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            {% if t.author_photo %}<img src="{{ t.author_photo.url }}" alt="{{ t.author_name }}">
+            {% else %}{{ t.author_name|first }}{% endif %}
+          </div>
+          <div>
+            <div class="testimonial-name">{{ t.author_name }}</div>
+            {% if t.dog_name %}<div class="testimonial-dog">🐾 Dog parent of {{ t.dog_name }}</div>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- BLOG PREVIEW -->
+{% if latest_posts %}
+<section style="background:var(--bg-card);border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-label">Latest News</span>
+      <h2 class="section-title fade-up">From Our Blog</h2>
+    </div>
+    <div class="blog-grid">
+      {% for post in latest_posts %}
+      <div class="blog-card fade-up">
+        <div class="blog-card-img">
+          {% if post.cover_image %}<img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+          {% else %}<div class="no-img">🐾</div>{% endif %}
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <span>{{ post.created_at|date:"M d, Y" }}</span>
+            {% if post.author %}<span>by {{ post.author.get_full_name|default:post.author.username }}</span>{% endif %}
+          </div>
+          <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+          {% if post.excerpt %}<p class="blog-excerpt">{{ post.excerpt|truncatewords:20 }}</p>{% endif %}
+          <a href="{{ post.get_absolute_url }}" class="blog-read-more">Read More →</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="{% url 'core:blog_list' %}" class="btn btn-outline">All Posts →</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to Book Your Dog's Dream Stay?</h2>
+    <p>Join thousands of happy pet parents who trust PawsInn. Your dog deserves the best!</p>
+    <a href="{% url 'core:contact' %}" class="btn btn-white">📅 Book Now — It's Free to Enquire</a>
+  </div>
+</section>
+
+{% endblock %}

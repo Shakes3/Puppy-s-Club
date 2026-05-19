@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} — PawsInn{% endblock %}
+{% block meta_desc %}{{ post.excerpt|default:post.title }}{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="{% url 'core:home' %}">Home</a> /
+      <a href="{% url 'core:blog_list' %}">Blog</a> /
+      {{ post.title|truncatewords:6 }}
+    </nav>
+    <h1 style="max-width:800px;">{{ post.title }}</h1>
+    <div class="blog-meta" style="margin-top:1rem;font-size:0.9rem;color:var(--text-muted);display:flex;gap:1.5rem;">
+      <span>📅 {{ post.created_at|date:"F d, Y" }}</span>
+      {% if post.author %}<span>✍️ {{ post.author.get_full_name|default:post.author.username }}</span>{% endif %}
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="post-layout">
+      <article>
+        {% if post.cover_image %}
+        <div class="post-cover">
+          <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
+        <div class="post-body">{{ post.body|safe }}</div>
+
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="{% url 'core:blog_list' %}" class="btn btn-outline">← Back to Blog</a>
+          <a href="{% url 'core:contact' %}" class="btn btn-primary">Book a Stay 🐾</a>
+        </div>
+      </article>
+
+      <aside>
+        {% if recent_posts %}
+        <div class="sidebar-card">
+          <h4>Recent Posts</h4>
+          {% for p in recent_posts %}
+          <div class="sidebar-post">
+            {% if p.cover_image %}
+              <img src="{{ p.cover_image.url }}" alt="{{ p.title }}" class="sidebar-post-img">
+            {% else %}
+              <div class="sidebar-post-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🐾</div>
+            {% endif %}
+            <div>
+              <h5><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h5>
+              <small style="color:var(--text-muted);">{{ p.created_at|date:"M d, Y" }}</small>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="sidebar-card">
+          <h4>Book a Stay</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">Ready to give your dog the best holiday ever?</p>
+          <a href="{% url 'core:contact' %}" class="btn btn-primary" style="width:100%;justify-content:center;">Contact Us →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
