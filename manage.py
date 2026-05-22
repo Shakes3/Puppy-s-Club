@@ -20,3 +20,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# Field	Value
+# Username	admin
+# Password	admin123
+# Email	admin@pawsinn.com
