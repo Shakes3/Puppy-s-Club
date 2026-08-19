@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}PawsInn — Premium Dog Hostel & Boarding{% endblock %}
+{% block title %}House of Paws — Premium Dog Home & Boarding{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <div class="hero-badge fade-up">🐾 Premium Dog Hostel</div>
+      <div class="hero-badge fade-up">🐾 Premium Dog stay</div>
       <h1 class="hero-title fade-up stagger-1">
         {{ settings.hero_title|default:"A Home Away<br>From <span class='highlight'>Home</span> For Your Dog" }}
       </h1>
@@ -24,13 +24,13 @@
       {% if settings.hero_image %}
         <img src="{{ settings.hero_image.url }}" alt="Happy dogs at PawsInn">
       {% else %}
-        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Happy dog at PawsInn">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Happy dog at House of Paws">
       {% endif %}
       <div class="hero-img-badge">
-        <div class="badge-num">5K+</div>
+        <div class="badge-num">10+</div>
         <div class="badge-label">Happy Dogs<br>Hosted</div>
       </div>
-      <div class="hero-float-card">⭐ 4.9 / 5 Rating</div>
+      <div class="hero-float-card">⭐ 4.5 / 5 Rating</div>
     </div>
   </div>
 </section>
@@ -91,7 +91,7 @@
   <div class="container">
     <div class="section-header center">
       <span class="section-label">Our Happy Guests</span>
-      <h2 class="section-title fade-up">Life at PawsInn 🐶</h2>
+      <h2 class="section-title fade-up">Life at House of Paws🐶</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
       {% for img in gallery_preview %}
@@ -176,7 +176,7 @@
 <section class="cta-banner">
   <div class="container">
     <h2>Ready to Book Your Dog's Dream Stay?</h2>
-    <p>Join thousands of happy pet parents who trust PawsInn. Your dog deserves the best!</p>
+    <p>Join thousands of happy pet parents who trust House of Paws. Your dog deserves the best!</p>
     <a href="{% url 'core:contact' %}" class="btn btn-white">📅 Book Now — It's Free to Enquire</a>
   </div>
 </section>

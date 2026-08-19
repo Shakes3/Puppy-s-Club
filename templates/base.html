@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}PawsInn — Premium Dog Hostel{% endblock %}</title>
-  <meta name="description" content="{% block meta_desc %}PawsInn is a premium dog hostel offering boarding, grooming, daycare and more for your beloved furry friends.{% endblock %}">
+  <title>{% block title %}House of Paws — Premium Dog Home{% endblock %}</title>
+  <meta name="description" content="{% block meta_desc %}House of Paws is a premium dog hostel offering boarding, grooming, daycare and more for your beloved furry friends.{% endblock %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -15,7 +15,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
-  <a href="{% url 'core:home' %}" class="navbar-brand">🐾 Paws<span>Inn</span></a>
+  <a href="{% url 'core:home' %}" class="navbar-brand">🐾 House<span>of Paws</span></a>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -48,7 +48,7 @@
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-brand">🐾 Paws<span>Inn</span></div>
+      <div class="footer-brand">🐾 House<span>of Paws</span></div>
       <p class="footer-desc">A luxury home away from home for your furry family members. Professional care, endless love.</p>
       <div class="footer-social">
         {% if site.facebook_url %}<a href="{{ site.facebook_url }}" class="social-link" aria-label="Facebook">📘</a>{% endif %}
@@ -70,9 +70,9 @@
       <h4>Services</h4>
       <ul class="footer-links">
         <li><a href="{% url 'core:services' %}">Dog Boarding</a></li>
-        <li><a href="{% url 'core:services' %}">Grooming</a></li>
+        <!-- <li><a href="{% url 'core:services' %}">Grooming</a></li> -->
         <li><a href="{% url 'core:services' %}">Daycare</a></li>
-        <li><a href="{% url 'core:services' %}">Training</a></li>
+        <!-- <li><a href="{% url 'core:services' %}">Training</a></li> -->
       </ul>
     </div>
     <div class="footer-col">
@@ -85,7 +85,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© {% now "Y" %} PawsInn Dog Hostel. Made with ❤️ for dogs everywhere. &nbsp;|&nbsp; <a href="/admin/">Admin</a></p>
+    <p>© {% now "Y" %} House of Paws Dog Home. Made with ❤️ for dogs everywhere. &nbsp;|&nbsp; <a href="/admin/">Admin</a></p>
   </div>
 </footer>
 
